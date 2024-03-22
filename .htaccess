@@ -1,0 +1,24 @@
+
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME}\.php -f
+# RewriteRule ^.*(/.+)$ register.php$1 [NC,L]
+
+# RewriteEngine ON 
+
+RewriteEngine On
+RewriteCond %{THE_REQUEST} \s/+(.*)\.php(.*)\sHTTP.*$ [NC]
+RewriteRule ^ /%1%2 [R=302,L,NE]
+RewriteCond %{REQUEST_URI} !\.php
+RewriteRule ^([^\/]*)/([^\/]*)$ $1.php/$2 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9]+)/?$ redirect_To_Confirmemail.php?c=$1 [L] 
+</IfModule>
